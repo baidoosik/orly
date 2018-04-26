@@ -1,0 +1,19 @@
+# venv
+
+venv/
+
+# idea
+
+.idea/*
+
+# sql
+
+*.sqlite
+
+# media
+
+media
+
+# pyc
+
+.pyc
