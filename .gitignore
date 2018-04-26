@@ -8,12 +8,12 @@ venv/
 
 # sql
 
-*.sqlite
+*.sqlite3
 
 # media
 
 media
 
 # pyc
-
+__pycache__
 .pyc
