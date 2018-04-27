@@ -1,7 +1,16 @@
 {% extends "cover/layout.html" %}
 
 {% block body %}
-    <h1>ORLY COVER GENERATOR</h1>
+<h1>ORLY COVER GENERATOR</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <table>
+        {% csrf_token %}
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Generator">
+</form>
+<img src="/cover/image"/>
 {% endblock %}
 {% block extra_script %}
 {% endblock %}
