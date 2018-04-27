@@ -10,7 +10,11 @@
     </table>
     <input type="submit" value="Generator">
 </form>
-<img src="/cover/image"/>
+{% if form.get_params %}
+    <img src="{% url "cover:image_generator" %}?{{ form.get_params }} "/>
+{% else %}
+    <img src="{% url "cover:image_generator" %}"/>
+{% endif %}
 {% endblock %}
 {% block extra_script %}
 {% endblock %}
