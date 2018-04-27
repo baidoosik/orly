@@ -37,12 +37,16 @@ form 으로 받은 데이터를 통해서 이미지를 동적으로 생성.
 
 def image_generator(request):
     image = Image.new('RGB', (256, 256), color='green')
+    # receive args
     title = request.GET['title']
     top_text = request.GET['top_text']
     author = request.GET['author']
-
+    animal_code = request.GET['animal_code']
+    color_code = request.GET['color_code']
+    guide_text = request.GET['guide_text']
+    guide_text_placement = request.GET['guide_text_placement']
     ttf_path = settings.ROOT('assets', 'fonts', 'NanumGothicCoding.ttf')
-    font = ImageFont.truetype(ttf_path, 30 )
+    font = ImageFont.truetype(ttf_path, 30)
     # get a drawing context
     d = ImageDraw.Draw(image)
     # draw text, half opacity
