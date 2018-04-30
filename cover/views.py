@@ -21,8 +21,10 @@ def index(request):
             form.cleaned_data
     else:
         form = CoverForm()
+    anymal_list = [i for i in range(1, 41)]
     return render(request, 'cover/index.html', {
-        'form': form
+        'form': form,
+        'anymal_list': anymal_list
     })
 
 
