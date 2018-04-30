@@ -1,12 +1,30 @@
+{% load static %}
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>ORLY COVER GENERATOR</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}" >
+    <!--
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    -->
+    <style>
+        .text-primary{
+            margin-bottom: 1em;
+            margin-left: 1em;
+        }
+    </style>
 </head>
 <body>
-    {% block body %}
+    <h1 class="text-primary">ORLY COVER GENERATOR</h1>
+    {% block contents %}
     {% endblock %}
     {% block extra_script %}
     {% endblock %}
+
+    <script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+    <!--
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    -->
 </body>
 </html>

@@ -1,20 +1,36 @@
 {% extends "cover/layout.html" %}
+{% load static %}
+{% load bootstrap3 %}
 
-{% block body %}
-<h1>ORLY COVER GENERATOR</h1>
+{% block contents %}
 
-<form method="post" enctype="multipart/form-data">
-    <table>
-        {% csrf_token %}
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Generator">
-</form>
-{% if form.get_params %}
-    <img src="{% url "cover:image_generator" %}?{{ form.get_params }} "/>
-{% else %}
-    <img src="{% url "cover:image_generator" %}"/>
-{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <form method="post" enctype="multipart/form-data">
+                <table>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        {% bootstrap_icon "star" %} ORLY GENERATOR
+                    </button>
+                {% endbuttons %}
+                </table>
+            </form>
+        </div>
+        <div class="col-sm-3">
+            {% if form.get_params %}
+                <img src="{% url "cover:image_generator" %}?{{ form.get_params }} "/>
+            {% else %}
+                <img src="{% static 'img/generate.png' %}"/>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
+
 {% block extra_script %}
 {% endblock %}

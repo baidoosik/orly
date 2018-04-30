@@ -46,24 +46,29 @@ def image_generator(request):
     guide_text = request.GET['guide_text']
     guide_text_placement = request.GET['guide_text_placement']
     ttf_path = settings.ROOT('assets', 'fonts', 'NanumGothicCoding.ttf')
-    font = ImageFont.truetype(ttf_path, 30)
 
     animal_path = settings.ROOT('orly', 'static', 'img', 'animal_img', '{}.png'.format(animal_code))
     animal_img = Image.open(animal_path)
-    animal_img = animal_img.resize((300, 300))
+    animal_img = animal_img.resize((400, 400))
 
     color_number = COLOR_CODES[int(color_index)]
-    canvas_img = Image.new('RGB', (500, 700), color_number)
-    canvas_img.paste(animal_img, (100, 100))
+    canvas_img = Image.new('RGB', (500, 700), 'white')
+    canvas_img.paste(animal_img, (50, 30))
 
     # get a drawing context
     d = ImageDraw.Draw(canvas_img)
-    # draw text, half opacity
-    d.text((100, 10), title, font=font, fill=(0, 255, 255, 128))
-    # draw text, full opacity
-    d.text((100, 60), top_text, font=font, fill=(255, 0, 255, 255))
-    # draw text, full opacity
-    d.text((400, 500), author, font=font, fill=(255, 0, 255, 255))
+    d.rectangle(((0, 0), (500, 15)), fill=color_number)
+    d.rectangle(((0, 430), (500, 510)), fill=color_number)
+
+    # draw text
+    font = ImageFont.truetype(ttf_path, 70)
+    d.text((45, 430), title, font=font, fill=(255, 255, 255, 128))
+    font = ImageFont.truetype(ttf_path, 20)
+    d.text((160, 15), top_text, font=font, fill=(0, 0, 0, 255))
+    font = ImageFont.truetype(ttf_path, 35)
+    d.text((150, 510), guide_text, font=font, fill=(0, 0, 0, 255))
+    font = ImageFont.truetype(ttf_path, 30)
+    d.text((400, 600), author, font=font, fill=(0, 0, 0, 255))
     response = HttpResponse(content_type='image/png')
     canvas_img.save(response, format='PNG')
     return response
