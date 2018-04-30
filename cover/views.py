@@ -24,7 +24,9 @@ def index(request):
     anymal_list = [i for i in range(1, 41)]
     return render(request, 'cover/index.html', {
         'form': form,
-        'anymal_list': anymal_list
+        'anymal_list': anymal_list,
+        'color_list': ["#%02x%02x%02x" % (color[0], color[1], color[2])
+                       for color in COLOR_CODES]
     })
 
 

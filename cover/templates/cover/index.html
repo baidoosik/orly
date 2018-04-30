@@ -38,6 +38,16 @@
     {% endfor %}
     </div>
 </div>
+<div class="container-fluid">
+    <div class="row">
+    {% for color in color_list %}
+        <div class="col-lg-1">
+            <h2>{{ i }}</h2>
+            <label style="color:white; background-color:{{ color }}">{{ forloop.counter0 }}color</label>
+        </div>
+    {% endfor %}
+    </div>
+</div>
 
 
 {% endblock %}
