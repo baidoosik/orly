@@ -1,14 +1,11 @@
 from urllib.parse import urlencode
 from django import forms
-from orly.utiis import COLOR_CODES
 
 
 class CoverForm(forms.Form):
-    COLOR_CHOICES = [(i, '{}.{}'.format(i, str(COLOR_CODES[i])))
-                     for i in range(0, 17)]
-    title = forms.CharField()
-    top_text = forms.CharField()
-    author = forms.CharField()
+    title = forms.CharField(max_length=12)
+    top_text = forms.CharField(max_length=24)
+    author = forms.CharField(max_length=10)
     animal_code = forms.ChoiceField(choices=((i, i) for i in range(1,  41)),
                                     widget=forms.Select(
                                         attrs={'class': 'animal'}))

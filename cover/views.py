@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, HttpResponse
 from django.conf import settings
+from django.shortcuts import render, HttpResponse
 from PIL import Image, ImageFont, ImageDraw
+from .utiis import COLOR_CODES, adjust_text_position
 from .forms import CoverForm
-from orly.utiis import COLOR_CODES
+
 # Create your views here.
 
 '''
@@ -51,7 +52,8 @@ def image_generator(request):
     guide_text_placement = request.GET['guide_text_placement']
     ttf_path = settings.ROOT('assets', 'fonts', 'NanumGothicCoding.ttf')
 
-    animal_path = settings.ROOT('orly', 'static', 'img', 'animal_img', '{}.png'.format(animal_code))
+    animal_path = settings.ROOT('orly', 'static', 'img', 'animal_img',
+                                '{}.png'.format(animal_code))
     animal_img = Image.open(animal_path)
     animal_img = animal_img.resize((400, 400))
 
@@ -65,14 +67,17 @@ def image_generator(request):
     d.rectangle(((0, 430), (500, 510)), fill=color_number)
 
     # draw text
+    title_position, top_text_position, author_text_position, \
+    guide_text_wposition, guide_text_hposition = adjust_text_position(
+        title, top_text, author, guide_text, guide_text_placement)
     font = ImageFont.truetype(ttf_path, 70)
-    d.text((45, 430), title, font=font, fill=(255, 255, 255, 128))
+    d.text((title_position, 430), title, font=font, fill=(255, 255, 255, 128))
     font = ImageFont.truetype(ttf_path, 20)
-    d.text((160, 15), top_text, font=font, fill=(0, 0, 0, 255))
+    d.text((top_text_position, 15), top_text, font=font, fill=(0, 0, 0, 255))
     font = ImageFont.truetype(ttf_path, 35)
-    d.text((150, 510), guide_text, font=font, fill=(0, 0, 0, 255))
+    d.text((guide_text_wposition, guide_text_hposition), guide_text, font=font, fill=(0, 0, 0, 255))
     font = ImageFont.truetype(ttf_path, 30)
-    d.text((400, 600), author, font=font, fill=(0, 0, 0, 255))
+    d.text((author_text_position, 600), author, font=font, fill=(0, 0, 0, 255))
     response = HttpResponse(content_type='image/png')
     canvas_img.save(response, format='PNG')
     return response
