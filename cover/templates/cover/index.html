@@ -33,7 +33,7 @@
     {% for i in anymal_list %}
         <div class="col-lg-1">
             <h2>{{ i }}</h2>
-            <img src="{% static 'img/animal_img/' %}{{ i }}.png" height="100px" width="100px">
+            <img src="{% static 'img/animal_img/' %}{{ i }}.png" class="animal" id={{ i }} height="100px" width="100px">
         </div>
     {% endfor %}
     </div>
@@ -43,7 +43,7 @@
     {% for color in color_list %}
         <div class="col-lg-1">
             <h2>{{ i }}</h2>
-            <label style="color:white; background-color:{{ color }}">{{ forloop.counter0 }}color</label>
+            <label style="color:white; background-color:{{ color }}" class="color" id={{ forloop.counter0 }}>{{ forloop.counter0 }}color</label>
         </div>
     {% endfor %}
     </div>
@@ -53,4 +53,5 @@
 {% endblock %}
 
 {% block extra_script %}
+<script src="{% static 'js/index.js' %}"></script>
 {% endblock %}

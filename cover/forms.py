@@ -4,12 +4,15 @@ from orly.utiis import COLOR_CODES
 
 
 class CoverForm(forms.Form):
-    COLOR_CHOICES = [(i, '{}.{}'.format(i, str(COLOR_CODES[i]))) for i in range(0, 17)]
+    COLOR_CHOICES = [(i, '{}.{}'.format(i, str(COLOR_CODES[i])))
+                     for i in range(0, 17)]
     title = forms.CharField()
     top_text = forms.CharField()
     author = forms.CharField()
-    animal_code = forms.ChoiceField(choices=((i, i) for i in range(1,  41)))
-    color_code = forms.ChoiceField(choices=COLOR_CHOICES)
+    animal_code = forms.ChoiceField(choices=((i, i) for i in range(1,  41)),
+                                    widget=forms.Select(
+                                        attrs={'class': 'animal'}))
+    color_code = forms.ChoiceField(choices=((i, i) for i in range(0, 17)))
     guide_text = forms.CharField()
     guide_text_placement = forms.ChoiceField(
         choices=[
