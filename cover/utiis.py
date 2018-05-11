@@ -62,7 +62,8 @@ def adjust_text_position(title, top_text, author,
     if guide_text_placement == 'bottom_right':
         if hangul.findall(guide_text):
             guide_text_wposition = 500 - guide_text_size*len(guide_text) - \
-                                   guide_text_size*len(hangul.findall(guide_text))
+                                   guide_text_size*len(
+                                       hangul.findall(guide_text))
         else:
             guide_text_wposition = 500 - guide_text_size * len(guide_text)
         guide_text_hposition = 510
@@ -72,7 +73,8 @@ def adjust_text_position(title, top_text, author,
     elif guide_text_placement == 'top_right':
         if hangul.findall(guide_text):
             guide_text_wposition = 500 - guide_text_size*len(guide_text) - \
-                                   guide_text_size*len(hangul.findall(guide_text))
+                                   guide_text_size*len(
+                                       hangul.findall(guide_text))
         else:
             guide_text_wposition = 500 - guide_text_size * len(guide_text)
         guide_text_hposition = 50

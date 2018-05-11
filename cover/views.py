@@ -75,9 +75,11 @@ def image_generator(request):
     font = ImageFont.truetype(ttf_path, 20)
     d.text((top_text_position, 15), top_text, font=font, fill=(0, 0, 0, 255))
     font = ImageFont.truetype(ttf_path, 35)
-    d.text((guide_text_wposition, guide_text_hposition), guide_text, font=font, fill=(0, 0, 0, 255))
+    d.text((guide_text_wposition, guide_text_hposition),
+           guide_text, font=font, fill=(0, 0, 0, 255))
     font = ImageFont.truetype(ttf_path, 30)
-    d.text((author_text_position, 600), author, font=font, fill=(0, 0, 0, 255))
+    d.text((author_text_position, 600), author, font=font,
+           fill=(0, 0, 0, 255))
     response = HttpResponse(content_type='image/png')
     canvas_img.save(response, format='PNG')
     return response
