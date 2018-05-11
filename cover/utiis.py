@@ -1,3 +1,5 @@
+import re
+
 COLOR_CODES = [
     (85, 19, 93, 255),
     (113, 112, 110, 255),
@@ -37,18 +39,42 @@ def adjust_text_position(title, top_text, author,
     author_text_size = 15
     guide_text_size = 18
 
-    title_position = center - title_text_size*0.5*len(title)
-    top_text_position = center - top_text_size*0.5*len(top_text)
-    author_text_position = right - author_text_size*len(author)
+    # 한글 , 영어 별로 font 크기 설정.
+    hangul = re.compile('[가-힣]')
+    if hangul.findall(title):
+        title_position = center - title_text_size*0.5*len(title) - \
+                         title_text_size*0.5*len(hangul.findall(title))
+    else:
+        title_position = center - title_text_size * 0.5 * len(title)
+
+    if hangul.findall(top_text):
+        top_text_position = center - top_text_size*0.5*len(top_text) - \
+                            top_text_size*0.5*len(hangul.findall(top_text))
+    else:
+        top_text_position = center - top_text_size*0.5*len(top_text)
+
+    if hangul.findall(author):
+        author_text_position = right - author_text_size*len(author) - \
+                               author_text_size*len(hangul.findall(author))
+    else:
+        author_text_position = right - author_text_size*len(author)
 
     if guide_text_placement == 'bottom_right':
-        guide_text_wposition = 500 - guide_text_size*len(guide_text)
+        if hangul.findall(guide_text):
+            guide_text_wposition = 500 - guide_text_size*len(guide_text) - \
+                                   guide_text_size*len(hangul.findall(guide_text))
+        else:
+            guide_text_wposition = 500 - guide_text_size * len(guide_text)
         guide_text_hposition = 510
     elif guide_text_placement == 'bottom_left':
         guide_text_wposition = 10
         guide_text_hposition = 510
     elif guide_text_placement == 'top_right':
-        guide_text_wposition = 500 - guide_text_size * len(guide_text)
+        if hangul.findall(guide_text):
+            guide_text_wposition = 500 - guide_text_size*len(guide_text) - \
+                                   guide_text_size*len(hangul.findall(guide_text))
+        else:
+            guide_text_wposition = 500 - guide_text_size * len(guide_text)
         guide_text_hposition = 50
     else:
         guide_text_wposition = 10
